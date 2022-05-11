@@ -2,11 +2,11 @@
 
 ### 使用齐次坐标目的是为了讲位移矩阵也可以用 Ax = B这种进行线性表示
 
-## ortho-projection matrix推导![orthoproj](C:..\Picture\Mortho-project.jpg)
+## ortho-projection matrix推导![orthoproj](..\Picture\Mortho-project.jpg)
 
 + z为变量，znear zfar为常量
 
-## ortho matrix的推导，将坐标变换为[-1， 1]^ 3![orthomatrix](..\Picture\ortho.jpg)
+## ortho matrix的推导，将坐标变换为[-1， 1]^ 3![ortho](..\Picture\ortho.jpg)
 
 ## 结果
 
