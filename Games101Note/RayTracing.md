@@ -1,0 +1,1 @@
+![Whitted-Styled-RayTracing](..\Picture\WhittedStyleRayTracing.png)
