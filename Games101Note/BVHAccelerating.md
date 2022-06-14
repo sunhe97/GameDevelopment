@@ -1,0 +1,1 @@
+![BVHAccelerating](..\Picture\BVHAccelerating.png)
