@@ -71,3 +71,44 @@ BVHBuildNode* recursiveBuild(std::vector<Object*> objects)
 
 
 
+# SAH
+
+## 排完序后不直接使用中间作为分割，而是去遍历整个size，找（表面积/总面积）* 物体个数（左） + （表面积/总面积）* 物体个数（右）最小的index 
+
+```c++
+ if(SAH){
+            // 递归分离节点
+            auto size = objects.size();
+            int proper_cut = 0;
+            double mintime = 0x3f3f3f;
+            for(int index=0; index<size; index++){
+                middling = objects.begin() + index;
+                auto leftshapes = std::vector<Object*>(beginning, middling);
+                auto rightshapes = std::vector<Object*>(middling, ending);
+ 
+                assert(objects.size() == (leftshapes.size() + rightshapes.size()));
+ 
+                Bounds3 leftBounds,rightBounds;
+                //     time = S_1面积 /S_0面积 *S_1空间物体数 * t_obj    
+                //              + S_2面积 /S_0面积 *S_2空间物体数 * t_obj 
+                for (int i = 0; i < leftshapes.size(); ++i)
+                    leftBounds =
+                        Union(leftBounds, leftshapes[i]->getBounds().Centroid());
+                for (int i = 0; i < rightshapes.size(); ++i)
+                    rightBounds =
+                        Union(rightBounds, rightshapes[i]->getBounds().Centroid());
+                
+                auto leftS = leftBounds.SurfaceArea();
+                auto rightS = rightBounds.SurfaceArea();
+                auto S = leftS + rightS;
+                auto time = leftS / S * leftshapes.size() + rightS / S * rightshapes.size();
+                if(time<mintime){
+                    mintime = time;
+                    proper_cut = index;
+                }
+            }
+            middling = objects.begin() + proper_cut;
+        }
+
+```
+
